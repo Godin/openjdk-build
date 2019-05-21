@@ -1,0 +1,23 @@
+language: java
+jdk: openjdk11
+
+matrix:
+  include:
+    - os: osx
+
+script:
+  - bash ./build.sh
+
+branches:
+  only:
+    - travis
+
+deploy:
+  provider: releases
+  api-key: $GITHUB_API_KEY
+  skip_cleanup: true
+  file_glob: true
+  file: "*.tar.gz"
+  on:
+    branch: travis
+  draft: true
